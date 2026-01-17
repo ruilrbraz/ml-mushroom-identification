@@ -162,7 +162,6 @@ A project presentation summarizing methodology, results, and conclusions is avai
 
 **Camilla Scandola**  
 **Rui Braz**  
-Machine Learning Project – Mushroom Identification  
 ---
 
 ## **📄 License**
