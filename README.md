@@ -32,7 +32,7 @@ Project documentation
 
 🧠 Dataset
 
-Source: Mushroom dataset (UCI / Kaggle variants)
+Source: Mushroom dataset (UCI)
 
 Samples: 8,124 mushrooms
 
