@@ -1,170 +1,209 @@
-\# 🍄 Mushroom Identification Using Machine Learning
-
-This project applies machine learning techniques to classify mushrooms as \*\*edible or poisonous\*\* based on their physical characteristics.    
-The work follows a complete end-to-end data science workflow, from data preprocessing and model development to evaluation, visualization, and presentation.
-
-\---
-
-\#\# 📌 Project Overview
-
-Correctly identifying poisonous mushrooms is a \*\*safety-critical classification task\*\*.    
-This project explores multiple machine learning models and evaluation strategies to minimize dangerous misclassifications, particularly cases where poisonous mushrooms are incorrectly labeled as edible.
-
-The dataset consists entirely of categorical features and is well suited for tree-based and ensemble learning methods.
-
-\---
-
-\#\# 📂 Repository Structure
-
-\- \`mushroom-identification-final.ipynb\`    
-  Final Jupyter Notebook containing:  
-  \- Data preprocessing  
-  \- Feature engineering  
-  \- Model training  
-  \- Hyperparameter tuning  
-  \- Model evaluation  
-  \- Visualizations
-
-\- \`README.md\`    
-  Project documentation (this file)
-
-\---
-
-\#\# 🧠 Dataset
-
-\- \*\*Source:\*\* Mushroom dataset (UCI)  
-\- \*\*Samples:\*\* 8,124 mushrooms  
-\- \*\*Features:\*\* Categorical physical attributes  
-\- \*\*Target variable:\*\*    
-  \- \`0\` → Edible    
-  \- \`1\` → Poisonous
-
-\#\#\# Missing Values  
-\- Missing data was found in the \`stalk-root\` feature.  
-\- Missing values were handled by introducing a dedicated category (\`"m"\`), preserving potentially informative patterns rather than removing samples.
-
-\---
-
-\#\# 🔧 Data Preprocessing & Feature Engineering
-
-\- Replacement of missing values with explicit category  
-\- One-hot encoding of all categorical features  
-\- \`drop\_first=True\` used to avoid multicollinearity  
-\- Train/test split with stratification to preserve class balance
-
-\---
-
-\#\# 🤖 Models Implemented
-
-The following models were trained and evaluated:
-
-\- \*\*Logistic Regression\*\* (baseline model)  
-\- \*\*Decision Tree Classifier\*\*  
-  \- Unrestricted tree  
-  \- Depth-limited tree (\`max\_depth\`)  
-\- \*\*Random Forest Classifier\*\* (ensemble model)
-
-\---
-
-\#\# 🔍 Hyperparameter Tuning
-
-Hyperparameter tuning was performed using \*\*Grid Search with Cross-Validation\*\*, focusing on:
-
-\- Decision Tree:  
-  \- \`max\_depth\`  
-  \- \`min\_samples\_split\`  
-  \- \`min\_samples\_leaf\`
-
-\- Random Forest:  
-  \- \`n\_estimators\`  
-  \- \`max\_depth\`  
-  \- \`min\_samples\_leaf\`
-
-Cross-validation ensured that model performance was robust and not dependent on a single train–test split.
-
-\---
-
-\#\# 📊 Evaluation Strategy
-
-Model performance was evaluated using:
-
-\- Accuracy  
-\- Precision, recall, and F1-score  
-\- Confusion matrices
-
-Special attention was given to \*\*false negatives for the poisonous class\*\*, as misclassifying a poisonous mushroom as edible represents a critical safety risk.
-
-\---
-
-\#\# 🏆 Key Results
-
-\- Logistic Regression achieved high accuracy but produced a small number of dangerous misclassifications.  
-\- Decision Trees showed sensitivity to depth constraints, illustrating the bias–variance tradeoff.  
-\- \*\*Random Forest achieved perfect classification on the test set\*\*, eliminating all poisonous-to-edible errors.
-
-The Random Forest model was selected as the final model due to its robustness and superior safety performance.
-
-\---
-
-\#\# 📈 Feature Importance
-
-Feature importance analysis revealed that a small number of features drive most predictions, including:
-
-\- Odor  
-\- Spore print color  
-\- Gill characteristics
-
-These findings are consistent with known biological indicators of mushroom toxicity.
-
-\---
-
-\#\# 📊 Dashboard
-
-An interactive dashboard was created using \*\*Tableau\*\* to explore the dataset and visualize key patterns:
-
-🔗 \*\*Tableau Dashboard:\*\*    
-https://public.tableau.com/app/profile/rui.braz/viz/MushroomsAnalysis/Dashboard1?publish=yes
-
-\---
-
-\#\# 🎤 Presentation
-
-A project presentation summarizing methodology, results, and conclusions is available here:
-
-🔗 \*\*Presentation (Canva):\*\*    
-https://www.canva.com/design/DAG92-k1V3c/XLmJefX\_0byoNwCHGtra7Q/edit
-
-\---
-
-\#\# ⚠️ Limitations & Ethics
-
-\- The dataset is clean and curated; real-world mushroom identification is more complex.  
-\- Models trained on this dataset should \*\*not\*\* replace expert judgment.  
-\- Machine learning systems should be used as \*\*decision-support tools\*\*, especially in safety-critical domains.
-
-\---
-
-\#\# 🚀 Technologies Used
-
-\- Python  
-\- pandas, numpy  
-\- scikit-learn  
-\- matplotlib  
-\- Jupyter Notebook  
-\- Tableau  
-\- Canva
-
-\---
-
-\#\# 👤 Author
-
-\*\*Rui Braz\*\*    
-\*\*Camilla Scandola\*\*  
-Machine Learning Project – Mushroom Identification
-
-\---
-
-\#\# 📄 License
-
-This project is intended for educational and academic purposes.
-
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "dcb462fb-a5ff-441e-abde-4666c8e6da64",
+   "metadata": {},
+   "source": [
+    "# 🍄 Mushroom Identification Using Machine Learning\n",
+    "\n",
+    "This project applies machine learning techniques to classify mushrooms as **edible or poisonous** based on their physical characteristics.\n",
+    "The work follows a complete end-to-end data science workflow, from data preprocessing and model development to evaluation, visualization, and presentation.\n",
+    "\n",
+    "---\n",
+    "\n",
+    "## 📌 Project Overview\n",
+    "\n",
+    "Correctly identifying poisonous mushrooms is a **safety-critical classification task**.\n",
+    "This project explores multiple machine learning models and evaluation strategies to minimize dangerous misclassifications, particularly cases where poisonous mushrooms are incorrectly labeled as edible.\n",
+    "\n",
+    "The dataset consists entirely of categorical features and is well suited for tree-based and ensemble learning methods.\n",
+    "\n",
+    "---\n",
+    "\n",
+    "## 📂 Repository Structure\n",
+    "\n",
+    "- `mushroom-identification-final.ipynb`\n",
+    "Final Jupyter Notebook containing:\n",
+    "- Data preprocessing\n",
+    "- Feature engineering\n",
+    "- Model training\n",
+    "- Hyperparameter tuning\n",
+    "- Model evaluation\n",
+    "- Visualizations\n",
+    "\n",
+    "- `README.md`\n",
+    "Project documentation (this file)\n",
+    "\n",
+    "---\n",
+    "\n",
+    "## 🧠 Dataset\n",
+    "\n",
+    "- **Source:** Mushroom dataset (UCI)\n",
+    "- **Samples:** 8,124 mushrooms\n",
+    "- **Features:** Categorical physical attributes\n",
+    "- **Target variable:**\n",
+    "- `0` → Edible\n",
+    "- `1` → Poisonous\n",
+    "\n",
+    "### Missing Values\n",
+    "- Missing data was found in the `stalk-root` feature.\n",
+    "- Missing values were handled by introducing a dedicated category (`\"m\"`), preserving potentially informative patterns rather than removing samples.\n",
+    "\n",
+    "---\n",
+    "\n",
+    "## 🔧 Data Preprocessing & Feature Engineering\n",
+    "\n",
+    "- Replacement of missing values with explicit category\n",
+    "- One-hot encoding of all categorical features\n",
+    "- `drop_first=True` used to avoid multicollinearity\n",
+    "- Train/test split with stratification to preserve class balance\n",
+    "\n",
+    "---\n",
+    "\n",
+    "## 🤖 Models Implemented\n",
+    "\n",
+    "The following models were trained and evaluated:\n",
+    "\n",
+    "- **Logistic Regression** (baseline model)\n",
+    "- **Decision Tree Classifier**\n",
+    "- Unrestricted tree\n",
+    "- Depth-limited tree (`max_depth`)\n",
+    "- **Random Forest Classifier** (ensemble model)\n",
+    "\n",
+    "---\n",
+    "\n",
+    "## 🔍 Hyperparameter Tuning\n",
+    "\n",
+    "Hyperparameter tuning was performed using **Grid Search with Cross-Validation**, focusing on:\n",
+    "\n",
+    "- Decision Tree:\n",
+    "- `max_depth`\n",
+    "- `min_samples_split`\n",
+    "- `min_samples_leaf`\n",
+    "\n",
+    "- Random Forest:\n",
+    "- `n_estimators`\n",
+    "- `max_depth`\n",
+    "- `min_samples_leaf`\n",
+    "\n",
+    "Cross-validation ensured that model performance was robust and not dependent on a single train–test split.\n",
+    "\n",
+    "---\n",
+    "\n",
+    "## 📊 Evaluation Strategy\n",
+    "\n",
+    "Model performance was evaluated using:\n",
+    "\n",
+    "- Accuracy\n",
+    "- Precision, recall, and F1-score\n",
+    "- Confusion matrices\n",
+    "\n",
+    "Special attention was given to **false negatives for the poisonous class**, as misclassifying a poisonous mushroom as edible represents a critical safety risk.\n",
+    "\n",
+    "---\n",
+    "\n",
+    "## 🏆 Key Results\n",
+    "\n",
+    "- Logistic Regression achieved high accuracy but produced a small number of dangerous misclassifications.\n",
+    "- Decision Trees showed sensitivity to depth constraints, illustrating the bias–variance tradeoff.\n",
+    "- **Random Forest achieved perfect classification on the test set**, eliminating all poisonous-to-edible errors.\n",
+    "\n",
+    "The Random Forest model was selected as the final model due to its robustness and superior safety performance.\n",
+    "\n",
+    "---\n",
+    "\n",
+    "## 📈 Feature Importance\n",
+    "\n",
+    "Feature importance analysis revealed that a small number of features drive most predictions, including:\n",
+    "\n",
+    "- Odor\n",
+    "- Spore print color\n",
+    "- Gill characteristics\n",
+    "\n",
+    "These findings are consistent with known biological indicators of mushroom toxicity.\n",
+    "\n",
+    "---\n",
+    "\n",
+    "## 📊 Dashboard\n",
+    "\n",
+    "An interactive dashboard was created using **Tableau** to explore the dataset and visualize key patterns:\n",
+    "\n",
+    "🔗 **Tableau Dashboard:**\n",
+    "https://public.tableau.com/app/profile/rui.braz/viz/MushroomsAnalysis/Dashboard1?publish=yes\n",
+    "\n",
+    "---\n",
+    "\n",
+    "## 🎤 Presentation\n",
+    "\n",
+    "A project presentation summarizing methodology, results, and conclusions is available here:\n",
+    "\n",
+    "🔗 **Presentation (Canva):**\n",
+    "https://www.canva.com/design/DAG92-k1V3c/XLmJefX\\_0byoNwCHGtra7Q/edit\n",
+    "\n",
+    "---\n",
+    "\n",
+    "## ⚠️ Limitations & Ethics\n",
+    "\n",
+    "- The dataset is clean and curated; real-world mushroom identification is more complex.\n",
+    "- Models trained on this dataset should **not** replace expert judgment.\n",
+    "- Machine learning systems should be used as **decision-support tools**, especially in safety-critical domains.\n",
+    "\n",
+    "---\n",
+    "\n",
+    "## 🚀 Technologies Used\n",
+    "\n",
+    "- Python\n",
+    "- pandas, numpy\n",
+    "- scikit-learn\n",
+    "- matplotlib\n",
+    "- Jupyter Notebook\n",
+    "- Tableau\n",
+    "- Canva\n",
+    "\n",
+    "---\n",
+    "\n",
+    "## 👤 Author\n",
+    "\n",
+    "**Rui Braz**\n",
+    "**Camilla Scandola**\n",
+    "Machine Learning Project – Mushroom Identification\n",
+    "\n",
+    "---\n",
+    "\n",
+    "## 📄 License\n",
+    "\n",
+    "This project is intended for educational and academic purposes."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "aaf7de0b-2c71-4bc4-a3f4-31e49b1b2df8",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python [conda env:base] *",
+   "language": "python",
+   "name": "conda-base-py"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.13.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
