@@ -12,6 +12,7 @@ The dataset consists entirely of categorical features and is well suited for tre
 📂 Repository Structure
 
 mushroom-identification-final.ipynb
+
 Final Jupyter Notebook containing:
   Data preprocessing
   Feature engineering
